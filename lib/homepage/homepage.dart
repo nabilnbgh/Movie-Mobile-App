@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_application/model/anime.dart';
 import 'package:movie_application/model/apiservice.dart';
 import 'package:movie_application/moviecard.dart';
+import 'dart:developer' as developer;
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
         });
       }
     } catch (e) {
-      print('Error fetching data: $e');
+      developer.log('Error fetching data: $e');
     }
   }
 

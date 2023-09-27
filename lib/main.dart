@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_application/comingsoonpage/comingsoonpage.dart';
+import 'package:movie_application/profilepage/profilepage.dart';
 import 'package:movie_application/downloadpage/downloadpage.dart';
 import 'package:movie_application/homepage/homepage.dart';
 import 'package:movie_application/searchpage/searchpage.dart';
@@ -20,11 +20,11 @@ class _MainState extends State<Main> {
   Widget currentPage() {
     switch (currentIndex) {
       case 1:
-        return const CommingSoonPage();
-      case 2:
         return const SearchPage();
-      case 3:
+      case 2:
         return const DownloadPage();
+      case 3:
+        return const ProfilePage();
       default:
         return const HomePage();
     }
@@ -57,17 +57,17 @@ class _MainState extends State<Main> {
                 label: "Home",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.play_circle_outline_rounded),
-                label: "Coming Soon",
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: "Search",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.download),
                 label: "Download",
-              )
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: "Profile",
+              ),
             ],
           ),
           body: currentPage(),

@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:movie_application/model/anime.dart';
 
 class APIService {
-  String url = 'http://192.168.100.3:3000/';
+  String url = 'http://10.5.100.227:3000/';
   final Dio dio = Dio();
 
   Future<List<Anime>> getPopularAnime(CancelToken cancelToken) async {
@@ -20,7 +20,6 @@ class APIService {
         throw Exception('Failed to load popular anime');
       }
     } catch (e) {
-      print("popular anime");
       rethrow;
     }
   }

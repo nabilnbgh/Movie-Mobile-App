@@ -1,14 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CommingSoonPage extends StatefulWidget {
-  const CommingSoonPage({super.key});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
-  State<CommingSoonPage> createState() => _CommingSoonPageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _CommingSoonPageState extends State<CommingSoonPage> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return const Text(
