@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_application/detailpage/detailpage.dart';
 import 'package:movie_application/model/anime.dart';
 
 class MovieCard extends StatelessWidget {
@@ -7,11 +8,19 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 10,
-      child: Image.network(
-        anime.animeImg,
-        height: 250,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailPage(animeId: anime.animeId)));
+      },
+      child: Card(
+        elevation: 10,
+        child: Image.network(
+          anime.animeImg,
+          height: 250,
+        ),
       ),
     );
   }

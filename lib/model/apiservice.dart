@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:movie_application/model/anime.dart';
+import 'package:movie_application/model/animedetail.dart';
 
 class APIService {
-  String url = 'http://10.5.100.227:3000/';
+  String url = 'http://192.168.100.3:3000/';
   final Dio dio = Dio();
 
   Future<List<Anime>> getPopularAnime(CancelToken cancelToken) async {
@@ -80,6 +81,24 @@ class APIService {
         return listAnime;
       } else {
         throw Exception('Failed to load anime movies');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<AnimeDetail> getDetailAnime(
+      String animeId, CancelToken cancelToken) async {
+    final Uri uri = Uri.parse(url).replace(path: 'anime-details/$animeId');
+    try {
+      final response = await dio.getUri(uri, cancelToken: cancelToken);
+      if (response.statusCode == 200) {
+        Map<String, dynamic> json = response.data;
+        AnimeDetail data = AnimeDetail.fromJson(json);
+        return data;
+        // return data;
+      } else {
+        throw Exception('Failed to load detailed anime');
       }
     } catch (e) {
       rethrow;

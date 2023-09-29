@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^1.1.0
   dio: ^5.3.3
+  json_serializable: ^6.7.1
+  json_annotation: ^4.8.1
+  build_runner: ^2.4.6
+  expandable_text: ^2.3.0
 
 dev_dependencies:
   flutter_test:
