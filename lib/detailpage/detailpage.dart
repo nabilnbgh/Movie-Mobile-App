@@ -3,6 +3,7 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_application/model/animedetail.dart';
 import 'package:movie_application/model/apiservice.dart';
+import 'package:movie_application/videoplayer/playerpage.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key, required this.animeId});
@@ -15,14 +16,31 @@ class _DetailPageState extends State<DetailPage> {
   APIService apiService = APIService();
   AnimeDetail? animeDetail;
   CancelToken cancelToken = CancelToken();
+  CancelToken getURLCancelToken = CancelToken();
   bool isLoading = true;
   void getData() async {
     animeDetail = await apiService.getDetailAnime(widget.animeId, cancelToken);
-
     setState(() {
-      print(animeDetail!.totalEpisodes);
       isLoading = false;
     });
+  }
+
+  Widget setGenre() {
+    var text = "Genres: ";
+    for (var e in animeDetail!.genres) {
+      final isLast =
+          animeDetail!.genres.indexOf(e) == animeDetail!.genres.length - 1;
+      !isLast ? text += '$e, ' : text += e;
+    }
+    return Text(
+      text,
+      style: const TextStyle(
+        fontFamily: 'Poppins',
+        color: Colors.white,
+        fontSize: 12,
+      ),
+      maxLines: 2,
+    );
   }
 
   @override
@@ -56,6 +74,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 )
               : Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Image.network(
                       animeDetail!.animeImg,
@@ -79,6 +98,7 @@ class _DetailPageState extends State<DetailPage> {
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
                             overflow: TextOverflow.ellipsis),
+                        maxLines: 3,
                       ),
                     ),
                     Container(
@@ -142,76 +162,22 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(top: 8),
-                      padding: const EdgeInsets.all(8),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text(
-                            "Genres: ",
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
-                            textAlign: TextAlign.justify,
-                          ),
-                          Row(
-                              children: animeDetail!.genres.map((e) {
-                            final isLast = animeDetail!.genres.indexOf(e) ==
-                                animeDetail!.genres.length - 1;
-                            !isLast ? e = '$e, ' : e;
-                            return Text(
-                              e,
-                              style: const TextStyle(
-                                fontFamily: 'Poppins',
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
-                            );
-                          }).toList()),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      constraints: BoxConstraints(
-                        minWidth: MediaQuery.of(context).size.width,
-                        minHeight: 0.0,
-                        maxHeight: 100,
-                      ),
-                      margin: const EdgeInsets.only(top: 8),
-                      padding: const EdgeInsets.all(8),
-                      child: const Text(
-                        'List Of Episodes',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      constraints: BoxConstraints(
-                        minWidth: MediaQuery.of(context).size.width,
-                        minHeight: 0.0,
-                        maxHeight: 100,
-                      ),
-                      margin: const EdgeInsets.only(top: 8),
-                      padding: const EdgeInsets.all(8),
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          return TextButton(
-                              onPressed: () {
-                                print('tapped');
-                              },
-                              child: Text(animeDetail!
-                                  .episodesList[index].episodeNum
-                                  .toString()));
-                        },
-                        itemCount: animeDetail!.episodesList.length,
-                      ),
-                    ),
+                        margin: const EdgeInsets.only(top: 8),
+                        padding: const EdgeInsets.all(8),
+                        width: MediaQuery.of(context).size.width,
+                        child: setGenre()),
+                    TextButton.icon(
+                      icon: const Icon(Icons.movie),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PlayerPage(
+                                      listEpisodes: animeDetail!.episodesList,
+                                    )));
+                      },
+                      label: const Text("Watch Now"),
+                    )
                   ],
                 ),
         ),

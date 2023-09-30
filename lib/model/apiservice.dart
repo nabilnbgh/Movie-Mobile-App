@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:movie_application/model/anime.dart';
 import 'package:movie_application/model/animedetail.dart';
+import 'package:movie_application/model/vidcdn.dart';
 
 class APIService {
   String url = 'http://192.168.100.3:3000/';
@@ -95,6 +96,25 @@ class APIService {
       if (response.statusCode == 200) {
         Map<String, dynamic> json = response.data;
         AnimeDetail data = AnimeDetail.fromJson(json);
+        return data;
+        // return data;
+      } else {
+        throw Exception('Failed to load detailed anime');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<VidCDN> getStreamingURL(
+      String animeId, CancelToken cancelToken) async {
+    // dio.options.headers['Referer'] = 'https://gogoplay.io/';
+    final Uri uri = Uri.parse(url).replace(path: 'vidcdn/watch/$animeId');
+    try {
+      final response = await dio.getUri(uri, cancelToken: cancelToken);
+      if (response.statusCode == 200) {
+        Map<String, dynamic> json = response.data;
+        VidCDN data = VidCDN.fromJson(json);
         return data;
         // return data;
       } else {
