@@ -1,11 +1,32 @@
 import 'package:dio/dio.dart';
 import 'package:movie_application/model/anime.dart';
 import 'package:movie_application/model/animedetail.dart';
+import 'package:movie_application/model/recentepisode.dart';
 import 'package:movie_application/model/vidcdn.dart';
 
 class APIService {
   String url = 'http://192.168.100.3:3000/';
   final Dio dio = Dio();
+
+  Future<List<RecentEpisode>> getRecentEpisode(CancelToken cancelToken) async {
+    final Uri uri =
+        Uri.parse(url).replace(path: 'recent-release', queryParameters: {
+      'page': '1',
+    });
+    try {
+      final response = await dio.getUri(uri, cancelToken: cancelToken);
+      if (response.statusCode == 200) {
+        List json = response.data;
+        List<RecentEpisode> listRecentEpisode = List<RecentEpisode>.from(
+            json.map((e) => RecentEpisode.fromJson(e)));
+        return listRecentEpisode;
+      } else {
+        throw Exception('Failed to load recent episodes');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   Future<List<Anime>> getPopularAnime(CancelToken cancelToken) async {
     final Uri uri = Uri.parse(url).replace(path: 'popular', queryParameters: {

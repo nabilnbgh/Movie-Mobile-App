@@ -166,18 +166,21 @@ class _DetailPageState extends State<DetailPage> {
                         padding: const EdgeInsets.all(8),
                         width: MediaQuery.of(context).size.width,
                         child: setGenre()),
-                    TextButton.icon(
-                      icon: const Icon(Icons.movie),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PlayerPage(
-                                      listEpisodes: animeDetail!.episodesList,
-                                    )));
-                      },
-                      label: const Text("Watch Now"),
-                    )
+                    animeDetail!.episodesList.isEmpty
+                        ? Container()
+                        : TextButton.icon(
+                            icon: const Icon(Icons.movie),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PlayerPage(
+                                            listEpisodes:
+                                                animeDetail!.episodesList,
+                                          )));
+                            },
+                            label: const Text("Watch Now"),
+                          )
                   ],
                 ),
         ),

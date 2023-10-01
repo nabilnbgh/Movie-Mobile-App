@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_application/profilepage/profilepage.dart';
-import 'package:movie_application/downloadpage/downloadpage.dart';
 import 'package:movie_application/homepage/homepage.dart';
 import 'package:movie_application/searchpage/searchpage.dart';
 
@@ -21,10 +19,6 @@ class _MainState extends State<Main> {
     switch (currentIndex) {
       case 1:
         return const SearchPage();
-      case 2:
-        return const DownloadPage();
-      case 3:
-        return const ProfilePage();
       default:
         return const HomePage();
     }
@@ -59,14 +53,6 @@ class _MainState extends State<Main> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: "Search",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.download),
-                label: "Download",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: "Profile",
               ),
             ],
           ),

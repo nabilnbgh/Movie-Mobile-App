@@ -13,7 +13,6 @@ class VidCDN {
   Map<String, dynamic> toJson() => _$VidCDNToJson(this);
 }
 
-
 @JsonSerializable()
 class Data {
   Data({required this.file, required this.label, required this.type});

@@ -3,15 +3,16 @@ import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_application/model/apiservice.dart';
 import 'package:movie_application/model/episode.dart';
+import 'package:movie_application/model/recentepisode.dart';
 import 'package:movie_application/model/vidcdn.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/services.dart';
 
 class PlayerPage extends StatefulWidget {
-  const PlayerPage({super.key, required this.listEpisodes});
+  const PlayerPage({super.key, required this.listEpisodes, this.recentEpisode});
 
   final List<Episode> listEpisodes;
-
+  final RecentEpisode? recentEpisode;
   @override
   State<PlayerPage> createState() => _PlayerPageState();
 }
@@ -23,8 +24,11 @@ class _PlayerPageState extends State<PlayerPage> {
   VidCDN? vidCDN;
   int selectedIndex = -1;
   bool isLoading = false;
+
   void getStreamingURL(int index) async {
-    final epsId = widget.listEpisodes[index].episodeId;
+    final epsId = widget.recentEpisode != null
+        ? widget.recentEpisode!.episodeId
+        : widget.listEpisodes[index].episodeId;
     vidCDN = await apiService.getStreamingURL(epsId, getURLCancelToken);
     setState(() {
       isLoading = false;
@@ -43,6 +47,14 @@ class _PlayerPageState extends State<PlayerPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.recentEpisode != null) {
+      getStreamingURL(-1);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
@@ -55,58 +67,63 @@ class _PlayerPageState extends State<PlayerPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ExpansionTile(
-                      iconColor: Colors.white,
-                      initiallyExpanded: true,
-                      tilePadding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      title: const Text(
-                        'List Of Episodes',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      children: [
-                        GridView.builder(
-                            shrinkWrap: true,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    childAspectRatio: 2.0, crossAxisCount: 4),
-                            itemCount: widget.listEpisodes.length,
-                            itemBuilder: (context, index) {
-                              return TextButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      if (flickManager != null) {
-                                        flickManager!.flickControlManager!
-                                            .pause();
-                                      }
-                                      selectedIndex = index;
-                                      isLoading = true;
-                                    });
-                                    getStreamingURL(index);
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll(
-                                      selectedIndex == index
-                                          ? Colors.white
-                                          : Colors.black,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    widget.listEpisodes[index].episodeNum
-                                        .toString(),
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: selectedIndex != index
-                                          ? Colors.white
-                                          : Colors.black,
-                                    ),
-                                  ));
-                            }),
-                      ]),
+                  widget.recentEpisode == null
+                      ? ExpansionTile(
+                          iconColor: Colors.white,
+                          initiallyExpanded: true,
+                          tilePadding:
+                              const EdgeInsets.symmetric(horizontal: 8.0),
+                          title: const Text(
+                            'List Of Episodes',
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          children: [
+                              GridView.builder(
+                                  shrinkWrap: true,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          childAspectRatio: 2.0,
+                                          crossAxisCount: 4),
+                                  itemCount: widget.listEpisodes.length,
+                                  itemBuilder: (context, index) {
+                                    return TextButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            if (flickManager != null) {
+                                              flickManager!.flickControlManager!
+                                                  .pause();
+                                            }
+                                            selectedIndex = index;
+                                            isLoading = true;
+                                          });
+                                          getStreamingURL(index);
+                                        },
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStatePropertyAll(
+                                            selectedIndex == index
+                                                ? Colors.white
+                                                : Colors.black,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          widget.listEpisodes[index].episodeNum
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: selectedIndex != index
+                                                ? Colors.white
+                                                : Colors.black,
+                                          ),
+                                        ));
+                                  }),
+                            ])
+                      : Container(),
                 ],
               ),
             ),

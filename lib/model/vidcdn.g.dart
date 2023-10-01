@@ -14,7 +14,7 @@ VidCDN _$VidCDNFromJson(Map<String, dynamic> json) => VidCDN(
       sources_bk: (json['sources_bk'] as List<dynamic>)
           .map((e) => Data.fromJson(e as Map<String, dynamic>))
           .toList(),
-    );  
+    );
 
 Map<String, dynamic> _$VidCDNToJson(VidCDN instance) => <String, dynamic>{
       'referer': instance.referer,
