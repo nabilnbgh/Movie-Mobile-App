@@ -62,41 +62,43 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 16, left: 16),
-              child: isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          Color.fromARGB(255, 6, 22, 236),
-                        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 16, left: 16),
+            child: isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Color.fromARGB(255, 6, 22, 236),
                       ),
-                    )
-                  : const Text(
-                      "Top Search",
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700),
                     ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            ListView.builder(
+                  )
+                : const Text(
+                    "Top Search",
+                    style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700),
+                  ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Expanded(
+            
+            child: ListView.builder(
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return SearchCard(anime: listSearchAnime[index]);
               },
               itemCount: listSearchAnime.length,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
