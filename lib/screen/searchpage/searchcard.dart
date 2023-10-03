@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_application/detailpage/detailpage.dart';
+import 'package:movie_application/screen/detailpage/detailpage.dart';
 import 'package:movie_application/model/anime.dart';
 
 class SearchCard extends StatelessWidget {

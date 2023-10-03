@@ -1,8 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_application/homepage/homepage.dart';
-import 'package:movie_application/searchpage/searchpage.dart';
+import 'package:flutter/services.dart';
+import 'package:movie_application/screen/bookmarkpage/bookmarkpage.dart';
+import 'package:movie_application/screen/homepage/homepage.dart';
+import 'package:movie_application/service/authservice.dart';
+import 'package:movie_application/screen/entry/authpage.dart';
+import 'package:movie_application/screen/searchpage/searchpage.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const Main());
 }
 
@@ -19,6 +28,10 @@ class _MainState extends State<Main> {
     switch (currentIndex) {
       case 1:
         return const SearchPage();
+      case 2:
+        return const BookmarkPage();
+      case 3:
+        return const AuthPage();
       default:
         return const HomePage();
     }
@@ -32,31 +45,47 @@ class _MainState extends State<Main> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.black,
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: (value) {
-              onTapped(value);
-            },
-            currentIndex: currentIndex,
-            type: BottomNavigationBarType.fixed,
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    return StreamProvider<User?>.value(
+      value: AuthService().user,
+      initialData: null,
+      child: MaterialApp(
+        home: SafeArea(
+          child: Scaffold(
             backgroundColor: Colors.black,
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white30,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: "Home",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: "Search",
-              ),
-            ],
+            bottomNavigationBar: BottomNavigationBar(
+              onTap: (value) {
+                onTapped(value);
+              },
+              currentIndex: currentIndex,
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: Colors.black,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.white30,
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: "Home",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.search),
+                  label: "Search",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.bookmark),
+                  label: "Bookmarks",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: "Profile",
+                ),
+              ],
+            ),
+            body: currentPage(),
           ),
-          body: currentPage(),
         ),
       ),
     );

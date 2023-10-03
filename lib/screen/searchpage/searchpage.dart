@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_application/model/anime.dart';
-import 'package:movie_application/model/apiservice.dart';
-import 'package:movie_application/searchpage/searchcard.dart';
+import 'package:movie_application/service/apiservice.dart';
+import 'package:movie_application/screen/searchpage/searchcard.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});

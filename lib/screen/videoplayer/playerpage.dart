@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_application/model/apiservice.dart';
+import 'package:movie_application/service/apiservice.dart';
 import 'package:movie_application/model/episode.dart';
 import 'package:movie_application/model/recentepisode.dart';
 import 'package:movie_application/model/vidcdn.dart';

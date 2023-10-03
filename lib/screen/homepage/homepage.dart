@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_application/model/anime.dart';
-import 'package:movie_application/model/apiservice.dart';
+import 'package:movie_application/service/apiservice.dart';
 import 'package:movie_application/model/recentepisode.dart';
-import 'package:movie_application/moviecard.dart';
+import 'package:movie_application/shared/moviecard.dart';
 import 'dart:developer' as developer;
 
 class HomePage extends StatefulWidget {

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "404855669942",
+    "project_id": "coffe-brew-uyami",
+    "storage_bucket": "coffe-brew-uyami.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404855669942:android:5ccedb2acf8b2855625217",
+        "android_client_info": {
+          "package_name": "com.notflex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404855669942-33aefptvgg6o6nmig4cu6sve24mjtp1a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy0hVFka3PETtM5uJIj8EwCI5__QQ6caY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404855669942-33aefptvgg6o6nmig4cu6sve24mjtp1a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "404855669942-epfc9ke3ftki318n0urdbhnf7s6rjjba.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.coffeebrew"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

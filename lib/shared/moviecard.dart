@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_application/detailpage/detailpage.dart';
+import 'package:movie_application/screen/detailpage/detailpage.dart';
 import 'package:movie_application/model/anime.dart';
 import 'package:movie_application/model/recentepisode.dart';
-import 'package:movie_application/videoplayer/playerpage.dart';
+import 'package:movie_application/screen/videoplayer/playerpage.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({super.key, this.anime, this.recentEpisode});

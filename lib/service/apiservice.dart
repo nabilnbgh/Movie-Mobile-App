@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 import 'package:movie_application/model/anime.dart';
 import 'package:movie_application/model/animedetail.dart';
+import 'package:movie_application/model/bookmark.dart';
 import 'package:movie_application/model/recentepisode.dart';
 import 'package:movie_application/model/vidcdn.dart';
 
@@ -109,7 +111,7 @@ class APIService {
     }
   }
 
-  Future<AnimeDetail> getDetailAnime(
+  Future<AnimeDetail?> getDetailAnime(
       String animeId, CancelToken cancelToken) async {
     final Uri uri = Uri.parse(url).replace(path: 'anime-details/$animeId');
     try {
@@ -123,7 +125,8 @@ class APIService {
         throw Exception('Failed to load detailed anime');
       }
     } catch (e) {
-      rethrow;
+      Logger().e(e);
+      return null;
     }
   }
 
