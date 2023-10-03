@@ -1,16 +1,53 @@
-# movie_application
+<h1 align="center">Anime Application</h1>
 
-A new Flutter project.
+This is my personal anime mobile Android application implemented in Flutter and Firebase.
 
-## Getting Started
+## Features
+1. Watch anime
+2. Bookmark anime
+3. Login/Register account to bookmark
 
-This project is a starting point for a Flutter application.
+## Screenshot
 
-A few resources to get you started if this is your first Flutter project:
+- Chat Page
+<img src="screenshot/home_page.jpg?raw=true"  height="500">
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Search Page
+<img src="screenshot/search_page.jpg?raw=true"  height="500">
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Bookmark Page
+<img src="screenshot/bookmark_page.jpg?raw=true"  height="500">
+
+- Entry Page
+<img src="screenshot/entry_page.jpg?raw=true"  height="500">
+
+- Detail Anime Page
+<img src="screenshot/detail_page.jpg?raw=true"  height="500">
+
+- Watch Anime Page
+<img src="screenshot/watch_page.jpg?raw=true"  height="500">
+
+
+## :pencil: Dependency & Credit
+
+- Dio
+- JSON Serializable
+- JSON Annotation
+- Build Runner
+- Expandable_text
+- Flick Video Player
+- Video Player
+- Firebase Cloud & Authentication
+- Logger
+- Provider
+
+I'm using this Backend (big thanks to riimuru):
+https://github.com/riimuru/gogoanime-api
+
+## :man_astronaut: Show your support
+
+Give a ⭐️ if this project helped you!
+
+## :warning: Disclaimer :warning:
+
+**This application is made for educational and research purposes only. I'm not responsible for anything that happened to you for using this application**
