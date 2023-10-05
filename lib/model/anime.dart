@@ -1,19 +1,17 @@
-class Anime {
-  Anime(
-      {required this.animeId,
-      required this.animeTitle,
-      required this.animeImg,
-      required this.animeUrl});
+import 'package:movie_application/model/metadataanime.dart';
+
+class Anime extends MetadataAnime {
+  Anime(String animeImg, String animeTitle,
+      {required this.animeId, required this.animeUrl})
+      : super(animeImg: animeImg, animeTitle: animeTitle);
   String animeId;
-  String animeTitle;
-  String animeImg;
   String animeUrl;
 
   static fromJson(Map<String, dynamic> map) {
     return Anime(
+      map['animeImg'],
+      map['animeTitle'],
       animeId: map['animeId'],
-      animeTitle: map['animeTitle'],
-      animeImg: map['animeImg'],
       animeUrl: map['animeUrl'],
     );
   }

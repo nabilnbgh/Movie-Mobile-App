@@ -8,11 +8,11 @@ part of 'recentepisode.dart';
 
 RecentEpisode _$RecentEpisodeFromJson(Map<String, dynamic> json) =>
     RecentEpisode(
+      json['animeTitle'] as String,
+      json['animeImg'] as String,
       episodeId: json['episodeId'] as String,
-      animeTitle: json['animeTitle'] as String,
       episodeNum: json['episodeNum'] as String,
       subOrDub: json['subOrDub'] as String,
-      animeImg: json['animeImg'] as String,
       episodeUrl: json['episodeUrl'] as String,
     );
 

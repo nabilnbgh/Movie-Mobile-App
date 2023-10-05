@@ -1,23 +1,22 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:movie_application/model/metadataanime.dart';
 
 part 'recentepisode.g.dart';
 
 @JsonSerializable()
-class RecentEpisode {
-  RecentEpisode({
+class RecentEpisode extends MetadataAnime {
+  RecentEpisode(
+    String animeTitle,
+    String animeImg, {
     required this.episodeId,
-    required this.animeTitle,
     required this.episodeNum,
     required this.subOrDub,
-    required this.animeImg,
     required this.episodeUrl,
-  });
+  }) : super(animeImg: animeImg, animeTitle: animeTitle);
 
   String episodeId;
-  String animeTitle;
   String episodeNum;
   String subOrDub;
-  String animeImg;
   String episodeUrl;
 
   factory RecentEpisode.fromJson(Map<String, dynamic> json) =>

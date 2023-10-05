@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:movie_application/model/anime.dart';
 import 'package:movie_application/model/animedetail.dart';
-import 'package:movie_application/model/bookmark.dart';
 import 'package:movie_application/model/recentepisode.dart';
 import 'package:movie_application/model/vidcdn.dart';
 

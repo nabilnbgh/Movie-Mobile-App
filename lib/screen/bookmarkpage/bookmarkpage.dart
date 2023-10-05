@@ -80,10 +80,11 @@ class _BookmarkPageState extends State<BookmarkPage> {
                       itemBuilder: (context, index) {
                         return SearchCard(
                           anime: Anime(
-                              animeId: listBookmark![index].animeId,
-                              animeImg: listBookmark![index].animeImg,
-                              animeTitle: listBookmark![index].animeTitle,
-                              animeUrl: ""),
+                            listBookmark![index].animeImg,
+                            listBookmark![index].animeTitle,
+                            animeId: listBookmark![index].animeId,
+                            animeUrl: "",
+                          ),
                         );
                       },
                       itemCount: listBookmark!.length,

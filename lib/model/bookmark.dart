@@ -1,16 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:movie_application/model/metadataanime.dart';
 part 'bookmark.g.dart';
 
 @JsonSerializable(createToJson: false)
-class Bookmark {
-  Bookmark({
+class Bookmark extends MetadataAnime {
+  Bookmark(
+    String animeTitle,
+    String animeImg, {
     required this.animeId,
-    required this.animeTitle,
-    required this.animeImg,
-  });
+  }) : super(animeImg: animeImg, animeTitle: animeTitle);
   String animeId;
-  String animeTitle;
-  String animeImg;
 
   factory Bookmark.fromJson(Map<String, dynamic> json) =>
       _$BookmarkFromJson(json);
