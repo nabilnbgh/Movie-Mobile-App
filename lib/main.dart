@@ -38,9 +38,11 @@ class _MainState extends State<Main> {
   }
 
   void onTapped(int index) {
-    setState(() {
-      currentIndex = index;
-    });
+    if (mounted) {
+      setState(() {
+        currentIndex = index;
+      });
+    }
   }
 
   @override

@@ -20,14 +20,18 @@ class _SearchPageState extends State<SearchPage> {
   TextEditingController searchController = TextEditingController();
 
   void getData() async {
-    setState(() {
-      isLoading = true;
-    });
+    if (mounted) {
+      setState(() {
+        isLoading = true;
+      });
+    }
     listSearchAnime = await apiService.getSearchAnime(keyword, cancelToken);
     if (!cancelToken.isCancelled) {
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -38,25 +42,28 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        title: Container(
-          height: 35,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.grey.withOpacity(0.2),
-          ),
-          child: TextField(
-            onChanged: (text) {
-              keyword = text;
-              getData();
-            },
-            style: const TextStyle(color: Colors.white),
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-              prefixIcon: Icon(Icons.search),
-              prefixIconColor: Colors.white,
-              hintText: "Search Anime",
-              hintStyle: TextStyle(
-                color: Colors.white,
+        title: Center(
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.2),
+            ),
+            child: Center(
+              child: TextField(
+                onChanged: (text) {
+                  keyword = text;
+                  getData();
+                },
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  prefixIcon: Icon(Icons.search),
+                  prefixIconColor: Colors.white,
+                  hintText: "Search Anime",
+                  hintStyle: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           ),
@@ -89,7 +96,6 @@ class _SearchPageState extends State<SearchPage> {
             height: 16,
           ),
           Expanded(
-            
             child: ListView.builder(
               shrinkWrap: true,
               itemBuilder: (context, index) {
